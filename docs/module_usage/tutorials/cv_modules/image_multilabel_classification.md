@@ -77,6 +77,7 @@ for res in output:
 
 运行结果参数含义如下：
 - `input_path`：表示输入待预测多类别图像的路径
+- `page_index`：如果输入是PDF文件，则表示当前是PDF的第几页，否则为 `None`
 - `class_ids`：表示多类别图像的预测标签ID
 - `scores`：表示多类别图像的预测标签置信度
 - `label_names`：表示多类别图像的预测标签名称
@@ -145,7 +146,7 @@ for res in output:
 <tr>
 <td><code>input</code></td>
 <td>待预测数据，支持多种输入类型</td>
-<td><code>Python Var</code>/<code>str</code>/<code>dict</code>/<code>list</code></td>
+<td><code>Python Var</code>/<code>str</code>/<code>list</code></td>
 <td>
 <ul>
   <li><b>Python变量</b>，如<code>numpy.ndarray</code>表示的图像数据</li>
@@ -325,7 +326,7 @@ python main.py -c paddlex/configs/modules/image_multilabel_classification/PP-LCN
   &quot;analysis&quot;: {
     &quot;histogram&quot;: &quot;check_dataset/histogram.png&quot;
   },
-  &quot;dataset_path&quot;: &quot;./dataset/mlcls_nus_examples&quot;,
+  &quot;dataset_path&quot;: &quot;mlcls_nus_examples&quot;,
   &quot;show_type&quot;: &quot;image&quot;,
   &quot;dataset_type&quot;: &quot;MLClsDataset&quot;
 }
