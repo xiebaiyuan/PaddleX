@@ -97,6 +97,7 @@ def packages_and_package_data():
     pkg_data.append("serving_requirements.txt")
     pkg_data.append("paddle2onnx_requirements.txt")
     pkg_data.append("hpip_links.html")
+    pkg_data.append("inference/utils/hpi_model_info_collection.json")
     ops_file_dir = "paddlex/ops"
     ops_file_types = ["h", "hpp", "cpp", "cc", "cu"]
     return pkgs, {
