@@ -1,4 +1,4 @@
-# copyright (c) 2024 PaddlePaddle Authors. All Rights Reserve.
+# Copyright (c) 2024 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from collections import defaultdict
-import lazy_paddle
+
 from ...utils.flags import USE_PIR_TRT
 
 
@@ -200,7 +200,7 @@ DISABLE_TRT_HALF_OPS_CONFIG = {
     "MobileNetV1_x0_5": {"fused_conv2d_add_act"},
     "SeaFormer_small": {"fused_conv2d_add_act"},
     "SeaFormer_tiny": {"fused_conv2d_add_act"},
-    "PP-OCRv4_mobile_seal_det": {"fused_conv2d_add_act","softmax"},
+    "PP-OCRv4_mobile_seal_det": {"fused_conv2d_add_act", "softmax"},
     "BlazeFace-FPN-SSH": {"fused_conv2d_add_act"},
 }
 

@@ -1,4 +1,4 @@
-# copyright (c) 2024 PaddlePaddle Authors. All Rights Reserve.
+# Copyright (c) 2024 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,12 @@
 # limitations under the License.
 
 
-import os
 import glob
 import itertools
+import os
 from pathlib import Path
 
-from setuptools import find_packages
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 def readme():
@@ -93,7 +92,6 @@ def packages_and_package_data():
     pkg_data.append("inference/pipelines/ppchatocrv3/ch_prompt.yaml")
     pkg_data.extend(pipeline_config)
     pkg_data.append(".version")
-    pkg_data.append("repo_manager/requirements.txt")
     pkg_data.append("serving_requirements.txt")
     pkg_data.append("paddle2onnx_requirements.txt")
     pkg_data.append("hpip_links.html")
