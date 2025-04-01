@@ -33,6 +33,8 @@ def check_image_size(input_):
 def resize(im, target_size, interp, backend="cv2"):
     """resize image to target size"""
     w, h = target_size
+    if w == im.shape[1] and h == im.shape[0]:
+        return im
     if backend.lower() == "pil":
         resize_function = _pil_resize
     else:
@@ -60,20 +62,12 @@ def _pil_resize(src, size, resample):
 
 def flip_h(im):
     """flip image horizontally"""
-    if len(im.shape) == 3:
-        im = im[:, ::-1, :]
-    elif len(im.shape) == 2:
-        im = im[:, ::-1]
-    return im
+    return cv2.flip(im, 1)
 
 
 def flip_v(im):
     """flip image vertically"""
-    if len(im.shape) == 3:
-        im = im[::-1, :, :]
-    elif len(im.shape) == 2:
-        im = im[::-1, :]
-    return im
+    return cv2.flip(im, 0)
 
 
 def slice(im, coords):
@@ -89,6 +83,9 @@ def pad(im, pad, val):
         pad = [pad] * 4
     if len(pad) != 4:
         raise ValueError
+    if all(x == 0 for x in pad):
+        return im
+
     chns = 1 if im.ndim == 2 else im.shape[2]
     im = cv2.copyMakeBorder(im, *pad, cv2.BORDER_CONSTANT, value=(val,) * chns)
     return im
