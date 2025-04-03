@@ -41,6 +41,8 @@ def check(file_path):
     # Exclude shebang line
     if content.startswith("#!"):
         content = content[content.index("\n") + 1 :]
+        if content.startswith("\n"):
+            content = content[1:]
     if not re.match(LICENSE_TEXT, content):
         print(f"License header missing in {file_path}")
         return False
