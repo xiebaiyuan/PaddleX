@@ -403,7 +403,8 @@ python main.py -c paddlex/configs/modules/table_classification/PP-LCNet_x1_0_tab
 </li>
 <li><code>train.log</code>: The training log file, which records changes in model metrics and loss during the training process;</li>
 <li><code>config.yaml</code>: The training configuration file, which logs the hyperparameter settings for this training session;</li>
-<li><code>.pdparams</code>、<code>.pdema</code>、<code>.pdopt.pdstate</code>、<code>.pdiparams</code>、<code>.pdmodel</code>: Model weight-related files, including network parameters, optimizer, EMA, static graph network parameters, and static graph network structure, etc.</li>
+<li><code>.pdparams</code>、<code>.pdema</code>、<code>.pdopt.pdstate</code>、<code>.pdiparams</code>、<code>.json</code>: Model weight-related files, including network parameters, optimizer, EMA, static graph network parameters, and static graph network structure, etc.</li>
+<li>Notice: Since Paddle 3.0.0, the format of storing static graph network structure has changed to json(the current<code>.json</code> file) from protobuf(the former<code>.pdmodel</code> file) to be compatible with PIR and more flexible and scalable.</li>
 </ul></details>
 
 ## <b>4.3 Model Evaluation</b>
