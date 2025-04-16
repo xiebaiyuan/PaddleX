@@ -24,7 +24,7 @@ In real production environments, many applications impose strict performance met
 
 Before using the high-performance inference plugin, please ensure that you have completed the PaddleX installation according to the [PaddleX Local Installation Tutorial](../installation/installation.en.md) and have run the quick inference using the PaddleX pipeline command line or the PaddleX pipeline Python script as described in the usage instructions.
 
-High-performance inference supports handling **PaddlePaddle static graph models (`.pdmodel`, `.json`)** and **ONNX format models (`.onnx`)**. For ONNX format models, it is recommended to convert them using the [Paddle2ONNX Plugin](./paddle2onnx.md). If multiple model formats are present in the model directory, PaddleX will automatically choose the appropriate one as needed.
+High-performance inference supports handling **PaddlePaddle static graph models (`.pdmodel`, `.json`)** and **ONNX format models (`.onnx`)**. For ONNX format models, it is recommended to convert them using the [Paddle2ONNX Plugin](./paddle2onnx.en.md). If multiple model formats are present in the model directory, PaddleX will automatically choose the appropriate one as needed.
 
 ### 1.1 Installing the High-Performance Inference Plugin
 
@@ -76,12 +76,12 @@ Refer to [Get PaddleX based on Docker](../installation/installation.en.md#21-obt
       <tr>
           <td>CPU</td>
           <td><code>paddlex --install hpi-cpu</code></td>
-          <td>Installs the CPU version of the high-performance inference functionality.</td>
+          <td>Installs the CPU version of the high-performance inference feature.</td>
       </tr>
       <tr>
           <td>GPU</td>
           <td><code>paddlex --install hpi-gpu</code></td>
-          <td>Installs the GPU version of the high-performance inference functionality.<br />Includes all functionalities of the CPU version.</td>
+          <td>Installs the GPU version of the high-performance inference feature.<br />Includes all functionalities of the CPU version.</td>
       </tr>
   </tbody>
 </table>
@@ -102,7 +102,7 @@ paddlex --install hpi-cpu
 
 ##### To install the GPU version of the high-performance inference plugin:
 
-Before installation, please ensure that CUDA and cuDNN are installed in your environment. The official PaddleX currently only provides a precompiled package for CUDA 11.8 + cuDNN 8.9, so please ensure that the installed versions of CUDA and cuDNN are compatible with the compiled versions. Below are the installation documentation links for CUDA 11.8 and cuDNN 8.9:
+Before installation, please ensure that CUDA and cuDNN are installed in your environment. The official PaddleX currently only provides precompiled packages for CUDA 11.8 + cuDNN 8.9, so please ensure that the installed versions of CUDA and cuDNN are compatible with the compiled versions. Below are the installation documentation links for CUDA 11.8 and cuDNN 8.9:
 
 - [Install CUDA 11.8](https://developer.nvidia.com/cuda-11-8-0-download-archive)
 - [Install cuDNN 8.9](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-890/install-guide/index.html)
@@ -128,11 +128,11 @@ paddlex --install hpi-gpu
 
 ##### To install the NPU version of the high-performance inference plugin:
 
-Please refer to the [Ascend NPU High-Performance Inference Tutorial](../practical_tutorials/high_performance_npu_tutorial.md).
+Please refer to the [Ascend NPU High-Performance Inference Tutorial](../practical_tutorials/high_performance_npu_tutorial.en.md).
 
 **Note:**
 
-1. **Currently, the official PaddleX only provides a precompiled package for CUDA 11.8 + cuDNN 8.9**; support for CUDA 12.6 is in progress.
+1. **Currently, the official PaddleX only provides precompiled packages for CUDA 11.8 + cuDNN 8.9**; support for CUDA 12 is in progress.
 2. Only one version of the high-performance inference plugin should exist in the same environment.
 3. For Windows systems, it is currently recommended to install and use the high-performance inference plugin within a Docker container.
 
@@ -216,12 +216,12 @@ In unrestricted manual configuration mode, full freedom is provided to configure
 
 ### 2.2 High-Performance Inference Configuration
 
-Common configuration fields for high-performance inference include:
+Common configuration items for high-performance inference include:
 
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
 <th>Description</th>
 <th>Type</th>
 <th>Default Value</th>
@@ -290,31 +290,31 @@ The optional values for `backend` are as follows:
   </tr>
 </table>
 
-The available options for `backend_config` vary for different backends, as shown in the following table:
+The available configuration items for `backend_config` vary for different backends, as shown in the following table:
 
 <table>
   <tr>
     <th>Backend</th>
-    <th>Options</th>
+    <th>Configuration Items</th>
   </tr>
   <tr>
     <td><code>paddle</code></td>
-    <td>Refer to <a href="../module_usage/instructions/model_python_API.en.md">PaddleX Single-Model Python Script Usage: 4. Inference Backend Settings</a>.</td>
+    <td>Refer to <a href="../module_usage/instructions/model_python_API.en.md#4-inference-configuration">PaddleX Single Model Python Usage Instructions</a>. The attributes of the <code>PaddlePredictorOption</code> object can be configured via key-value pairs.</td>
   </tr>
   <tr>
     <td><code>openvino</code></td>
-    <td><code>cpu_num_threads</code>: The number of logical processors used for CPU inference. The default is <code>8</code>.</td>
+    <td><code>cpu_num_threads</code> (<code>int</code>): The number of logical processors used for CPU inference. The default is <code>8</code>.</td>
   </tr>
   <tr>
     <td><code>onnxruntime</code></td>
-    <td><code>cpu_num_threads</code>: The number of parallel computation threads within the operator during CPU inference. The default is <code>8</code>.</td>
+    <td><code>cpu_num_threads</code> (<code>int</code>): The number of parallel computation threads within the operator during CPU inference. The default is <code>8</code>.</td>
   </tr>
   <tr>
     <td><code>tensorrt</code></td>
     <td>
-      <code>precision</code>: The precision used, either <code>fp16</code> or <code>fp32</code>. The default is <code>fp32</code>.
+      <code>precision</code> (<code>str</code>): The precision used, either <code>"fp16"</code> or <code>"fp32"</code>. The default is <code>"fp32"</code>.
       <br />
-      <code>dynamic_shapes</code>: Dynamic shapes. Dynamic shapes include the minimum shape, optimal shape, and maximum shape, which represent TensorRT’s ability to delay specifying some or all tensor dimensions until runtime. The format is: <code>{input tensor name}: [ [minimum shape], [optimal shape], [maximum shape] ]</code>. For more details, please refer to the <a href="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#work_dynamic_shapes">TensorRT official documentation</a>.
+      <code>dynamic_shapes</code> (<code>dict</code>): Dynamic shapes. Dynamic shapes include the minimum shape, optimal shape, and maximum shape, which represent TensorRT’s ability to delay specifying some or all tensor dimensions until runtime. The format is: <code>{input tensor name}: [{minimum shape}, {optimization shape}, {maximum shape}]</code>. For more details, please refer to the <a href="https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/work-dynamic-shapes.html">TensorRT official documentation</a>.
     </td>
   </tr>
   <tr>
@@ -615,22 +615,16 @@ python -m pip install ../../python/dist/ultra_infer*.whl
 
 **1. Why does the inference speed not appear to improve noticeably before and after enabling the high-performance inference plugin?**
 
-The high-performance inference plugin accelerates inference by intelligently selecting the backend.
+The high-performance inference plugin achieves inference acceleration by intelligently selecting and configuring the backend. However, due to the complex structure of some models or the presence of unsupported operators, not all models may be able to be accelerated. In these cases, PaddleX will provide corresponding prompts in the log. You can use the [PaddleX benchmark feature](../module_usage/instructions/benchmark.en.md) to measure the inference duration of each module component, thereby facilitating a more accurate performance evaluation. Moreover, for pipelines, the performance bottleneck of inference may not lie in the model inference, but rather in the surrounding logic, which could also result in limited acceleration gains.
 
-For modules, due to model complexity or unsupported operators, some models may not be able to use acceleration backends (such as OpenVINO, TensorRT, etc.). In such cases, corresponding messages will be logged, and the fastest available backend known will be chosen, which may fall back to standard inference.
+**2. Do all pipelines and modules support high-performance inference?**
 
-For model pipelines, the performance bottleneck may not lie in the inference stage.
-
-You can use the [PaddleX benchmark](../module_usage/instructions/benchmark.md) tool to conduct actual speed tests for a more accurate performance evaluation.
-
-**2. Does the high-performance inference functionality support all model pipelines and modules?**
-
-The high-performance inference functionality supports all model pipelines and modules, but some models may not see an acceleration effect due to reasons mentioned in FAQ 1.
+All pipelines and modules that use static graph models support enabling the high-performance inference plugin; however, in certain scenarios, some models might not be able to achieve accelerated inference. For detailed reasons, please refer to Question 1.
 
 **3. Why does the installation of the high-performance inference plugin fail with a log message stating: “Currently, the CUDA version must be 11.x for GPU devices.”?**
 
-The high-performance inference functionality currently supports only a limited set of environments. Please refer to the installation instructions. If installation fails, it may be that the current environment is not supported by the high-performance inference functionality. Note that CUDA 12.6 is already under support.
+For the GPU version of the high-performance inference plugin, the official PaddleX currently only provides precompiled packages for CUDA 11.8 + cuDNN 8.9. The support for CUDA 12 is in progress.
 
-**4. Why does the program freeze during runtime or display some WARNING and ERROR messages after using the high-performance inference functionality? What should be done in such cases?**
+**4. Why does the program freeze during runtime or display some "WARNING" and "ERROR" messages after using the high-performance inference feature? What should be done in such cases?**
 
-When initializing the model, operations such as subgraph optimization may take longer and may generate some WARNING and ERROR messages. However, as long as the program does not exit automatically, it is recommended to wait patiently, as the program usually continues to run to completion.
+When initializing the model, operations such as subgraph optimization may take longer and may generate some "WARNING" and "ERROR" messages. However, as long as the program does not exit automatically, it is recommended to wait patiently, as the program usually continues to run to completion.
