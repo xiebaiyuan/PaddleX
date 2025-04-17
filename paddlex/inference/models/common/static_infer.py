@@ -404,11 +404,15 @@ class PaddleInfer(StaticInfer):
                 config.enable_use_gpu(100, self._option.device_id, precision)
                 if hasattr(config, "enable_new_ir"):
                     config.enable_new_ir(self._option.enable_new_ir)
+                    if self._option.enable_new_ir and self._option.enable_cinn:
+                        config.enable_cinn()
                 if hasattr(config, "enable_new_executor"):
                     config.enable_new_executor()
                 config.set_optimization_level(3)
             elif self._option.device_type == "npu":
                 config.enable_custom_device("npu", self._option.device_id)
+                if hasattr(config, "enable_new_ir"):
+                    config.enable_new_ir(self._option.enable_new_ir)
                 if hasattr(config, "enable_new_executor"):
                     config.enable_new_executor()
             elif self._option.device_type == "xpu":
@@ -418,6 +422,8 @@ class PaddleInfer(StaticInfer):
                     config.enable_new_executor()
             elif self._option.device_type == "mlu":
                 config.enable_custom_device("mlu")
+                if hasattr(config, "enable_new_ir"):
+                    config.enable_new_ir(self._option.enable_new_ir)
                 if hasattr(config, "enable_new_executor"):
                     config.enable_new_executor()
             elif self._option.device_type == "gcu":
@@ -425,8 +431,9 @@ class PaddleInfer(StaticInfer):
 
                 gcu_passes.setUp()
                 config.enable_custom_device("gcu")
-                if hasattr(config, "enable_new_executor"):
+                if hasattr(config, "enable_new_ir"):
                     config.enable_new_ir()
+                if hasattr(config, "enable_new_executor"):
                     config.enable_new_executor()
                 else:
                     pass_builder = config.pass_builder()
