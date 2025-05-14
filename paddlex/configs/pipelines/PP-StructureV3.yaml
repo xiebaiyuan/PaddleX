@@ -143,7 +143,6 @@ SubPipelines:
 
   TableRecognition:
     pipeline_name: table_recognition_v2
-    batch_size: 8
     use_layout_detection: False
     use_doc_preprocessor: False
     use_ocr_model: False
@@ -175,7 +174,6 @@ SubPipelines:
     SubPipelines:
       GeneralOCR:
         pipeline_name: OCR
-        batch_size: 8
         text_type: general
         use_doc_preprocessor: False
         use_textline_orientation: True
