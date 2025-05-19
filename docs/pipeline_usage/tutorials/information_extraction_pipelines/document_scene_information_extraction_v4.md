@@ -635,7 +635,7 @@ retriever_config = {
 
 mllm_chat_bot_config = {
     "module_name": "chat_bot",
-    "model_name": "PP-DocBee",
+    "model_name": "PP-DocBee2",
     "base_url": "http://172.0.0.1:8080/v1/chat/completions",  # your local mllm service url
     "api_type": "openai",
     "api_key": "api_key",  # your api_key
@@ -2189,7 +2189,7 @@ print(result_chat["chatResult"])
 您可以根据需要选择合适的方式部署模型产线，进而进行后续的 AI 应用集成。
 
 ## 4. 二次开发
-如果文档场景信息抽取v4产线提供的默认模型权重在您的场景中，精度或速度不满意，您可以尝试利用<b>您自己拥有的特定领域或应用场景的数据</b>对现有模型进行进一步的<b>微调</b>，以提升通用表格识别产线的在您的场景中的识别效果。
+如果文档场景信息抽取v4产线提供的默认模型权重在您的场景中，精度或速度不满意，您可以尝试利用<b>您自己拥有的特定领域或应用场景的数据</b>对现有模型进行进一步的<b>微调</b>，以提升在您的场景中的识别效果。
 
 ### 4.1 模型微调
 由于文档场景信息抽取v4产线包含若干模块，模型产线的效果如果不及预期，可能来自于其中任何一个模块。您可以对提取效果差的 case 进行分析，通过可视化图像，确定是哪个模块存在问题，并参考以下表格中对应的微调教程链接进行模型微调。
@@ -2258,7 +2258,7 @@ print(result_chat["chatResult"])
 SubModules:
     TextDetection:
     module_name: text_detection
-    model_name: PP-OCRv4_server_det
+    model_name: PP-OCRv5_server_det
     model_dir: null # 替换为微调后的文本检测模型权重路径
     limit_side_len: 960
     limit_type: max
@@ -2268,7 +2268,7 @@ SubModules:
 
     TextRecognition:
     module_name: text_recognition
-    model_name: PP-OCRv4_server_rec
+    model_name: PP-OCRv5_server_rec
     model_dir: null # 替换为微调后的文本检测模型权重路径
     batch_size: 1
             score_thresh: 0

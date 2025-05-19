@@ -464,7 +464,7 @@ retriever_config = {
 
 mllm_chat_bot_config = {
     "module_name": "chat_bot",
-    "model_name": "PP-DocBee",
+    "model_name": "PP-DocBee2",
     "base_url": "http://172.0.0.1:8080/v1/chat/completions",  # your local mllm service url
     "api_type": "openai",
     "api_key": "api_key",  # your api_key
@@ -1984,7 +1984,7 @@ print(result_chat["chatResult"])
 You can choose an appropriate deployment method for your pipeline based on your needs and proceed with subsequent AI application integration.
 
 ## 4. Custom Development
-If the default model weights provided by the Document Scene Information Extraction v4 Pipeline do not meet your expectations in terms of accuracy or speed in your specific scenario, you can try to further **fine-tune** the existing models using **data from your specific domain or application scenario** to enhance the recognition performance of the General Table Recognition Pipeline in your context.
+If the default model weights provided by the Document Scene Information Extraction v4 Pipeline do not meet your expectations in terms of accuracy or speed in your specific scenario, you can try to further **fine-tune** the existing models using **data from your specific domain or application scenario** to enhance the recognition performance in your context.
 
 ### 4.1 Model Fine-Tuning
 Since the Document Scene Information Extraction v4 Pipeline consists of several modules, suboptimal performance may stem from any of these modules. You can analyze cases with poor extraction results, identify which module is problematic through visual image inspection, and refer to the fine-tuning tutorial links in the table below for model fine-tuning.
@@ -2051,7 +2051,7 @@ To use the fine-tuned model weights, you only need to modify the pipeline config
 SubModules:
     TextDetection:
     module_name: text_detection
-    model_name: PP-OCRv4_server_det
+    model_name: PP-OCRv5_server_det
     model_dir: null # Replace with the path to the fine-tuned text detection model weights
     limit_side_len: 960
     limit_type: max
@@ -2062,7 +2062,7 @@ SubModules:
 
     TextRecognition:
     module_name: text_recognition
-    model_name: PP-OCRv4_server_rec
+    model_name: PP-OCRv5_server_rec
     model_dir: null # Replace with the path to the fine-tuned text recognition model weights
     batch_size: 1
     score_thresh: 0
