@@ -80,7 +80,6 @@ REQUIRED_DEPS = [
     "chardet",
     "colorlog",
     "filelock",
-    "GPUtil",
     "huggingface_hub",
     "numpy",
     "packaging",
@@ -111,6 +110,7 @@ EXTRAS = {
         "multimodal": [
             "einops",
             "ftfy",
+            "GPUtil",
             "Jinja2",
             "opencv-contrib-python",
             # For the same reason as in `cv`
