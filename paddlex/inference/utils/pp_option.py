@@ -161,6 +161,12 @@ class PaddlePredictorOption(object):
                 f"`run_mode` must be {support_run_mode_str}, but received {repr(run_mode)}."
             )
 
+        if run_mode.startswith("mkldnn") and not is_mkldnn_available():
+            logging.warning("MKL-DNN is not available. Using `paddle` instead.")
+            run_mode = "paddle"
+
+        # TODO: Check if trt is available
+
         if self._model_name is not None:
             # TRT Blocklist
             if (
