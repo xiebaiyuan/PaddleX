@@ -1,25 +1,24 @@
 Global:
-  model_name: eslav_PP-OCRv5_mobile_rec # To use static model for inference.
+  model_name: latin_PP-OCRv5_mobile_rec # To use static model for inference.
   debug: false
   use_gpu: true
   epoch_num: 75
   log_smooth_window: 20
   print_batch_step: 10
-  save_model_dir: ./output/eslav_rec_ppocr_v5
+  save_model_dir: ./output/latin_rec_ppocr_v5
   save_epoch_step: 10
-  eval_batch_step: [0, 1000]
+  eval_batch_step: [0, 500]
   cal_metric_during_train: true
-  pretrained_model:
+  pretrained_model: 
   checkpoints:
   save_inference_dir:
   use_visualdl: false
   infer_img:
-  character_dict_path: ./ppocr/utils/dict/eslav_dict.txt
-  max_text_length: &max_text_length 25
+  character_dict_path: ppocr/utils/dict/ppocrv5_latin_dict.txt
   infer_mode: false
   use_space_char: true
   distributed: true
-  save_res_path: ./output/rec/predicts_eslav_ppocrv5.txt
+  save_res_path: ./output/rec/predicts_ppocrv5_latin.txt
   d2s_train_image_shape: [3, 48, 320]
 
 
@@ -58,7 +57,7 @@ Architecture:
             fc_decay: 0.00001
       - NRTRHead:
           nrtr_dim: 384
-          max_text_length: *max_text_length
+          max_text_length: 25
 
 Loss:
   name: MultiLoss
@@ -90,9 +89,10 @@ Train:
         prob: 0.5
         ext_data_num: 2
         image_shape: [48, 320, 3]
-        max_text_length: *max_text_length
+        max_text_length: 25
     - RecAug:
     - MultiLabelEncode:
+        max_text_length: 25
         gtc_encode: NRTRLabelEncode
     - KeepKeys:
         keep_keys:
@@ -118,14 +118,16 @@ Eval:
     name: SimpleDataSet
     data_dir: ./train_data/
     label_file_list:
-    - ./train_data/val_list.txt
+    - ./train_data/eval_list.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
         channel_first: false
     - MultiLabelEncode:
+        max_text_length: 1000
         gtc_encode: NRTRLabelEncode
     - RecResizeImg:
+        eval_mode: True
         image_shape: [3, 48, 320]
     - KeepKeys:
         keep_keys:
@@ -135,7 +137,7 @@ Eval:
         - length
         - valid_ratio
   loader:
-    shuffle: true
+    shuffle: false
     drop_last: false
-    batch_size_per_card: 128
+    batch_size_per_card: 1
     num_workers: 4
