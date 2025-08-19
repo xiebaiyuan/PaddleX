@@ -152,6 +152,13 @@ EXTRAS = {
             "shapely",
             "tokenizers",
         ],
+        "ocr-core": [
+            "imagesize",
+            "opencv-contrib-python",
+            "pyclipper",
+            "pypdfium2",
+            "shapely",
+        ],
         "ocr": [
             "einops",
             "ftfy",
