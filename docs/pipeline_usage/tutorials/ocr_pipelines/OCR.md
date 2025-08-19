@@ -15,6 +15,9 @@ OCR（光学字符识别，Optical Character Recognition）是一种将图像中
 <b>通用OCR产线中包含必选的文本检测模块和文本识别模块，</b>以及可选的文档图像方向分类模块、文本图像矫正模块和文本行方向分类模块。其中，文档图像方向分类模块和文本图像矫正模块作为文档预处理子产线被集成到通用OCR产线中。每个模块都包含多个模型，您可以根据下方的基准测试数据选择使用的模型。
 
 <b>如果您更注重模型的精度，请选择精度较高的模型；如果您更在意模型的推理速度，请选择推理速度较快的模型；如果您关注模型的存储大小，请选择存储体积较小的模型。</b>
+
+> 推理耗时仅包含模型推理耗时，不包含前后处理耗时。
+
 <p><b>文档图像方向分类模块（可选）：</b></p>
 <table>
 <thead>
@@ -1137,6 +1140,12 @@ for res in output:
 <td>否</td>
 </tr>
 <tr>
+<td><code>useDocOrientationClassify</code></td>
+<td><code>boolean</code> | <code>null</code></td>
+<td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_doc_orientation_classify</code> 参数相关说明。</td>
+<td>否</td>
+</tr>
+<tr>
 <td><code>useDocUnwarping</code></td>
 <td><code>boolean</code> | <code>null</code></td>
 <td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_doc_unwarping</code> 参数相关说明。</td>
@@ -1200,12 +1209,6 @@ for res in output:
 </code></pre>
 将默认不返回图像，通过请求体中的<code>visualize</code>参数可以覆盖默认行为。如果请求体和配置文件中均未设置（或请求体传入<code>null</code>、配置文件中未设置），则默认返回图像。
 </td>
-<td>否</td>
-</tr>
-<tr>
-<td><code>useDocOrientationClassify</code></td>
-<td><code>boolean</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_doc_orientation_classify</code> 参数相关说明。</td>
 <td>否</td>
 </tr>
 </tbody>
